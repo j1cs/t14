@@ -1,0 +1,66 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "output": "eDP-1",
+    "height": 24,
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": [],
+    "modules-right": ["pulseaudio", "network", "battery", "clock", "backlight", "custom/power"],
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/workspaces": {
+         "all-outputs": true
+    },
+    "clock": {
+        "interval": 1,
+        "format": "{:%H:%M %d-%m-%Y} ",
+        "tooltip": false
+    },
+    "battery": {
+        "bat": "BAT0",
+        "adapter": "AC0",
+        "states": {
+            "good": 99,
+            "warning": 30,
+            "critical": 15
+        },
+        "interval": 1,
+        "format": "{capacity}% {icon}",
+        "format-good": "100% {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2s0", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-disconnected": "Disconnected ⚠"
+    },
+    "pulseaudio": {
+        //"scroll-step": 1,
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{percent}% {icon}",
+        "format-icons": [ "", "","", "", "", "", ""],
+        "on-scroll-up": "light -A 5",
+        "on-scroll-down": "light -U 5"
+    },
+    "custom/power": {
+        "format":"", 
+        "on-click": "/home/glats/.config/wofi/wofi-exit.sh"
+    }
+}

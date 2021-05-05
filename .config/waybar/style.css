@@ -1,0 +1,77 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-size: 13px;
+    font-family: monospace,sans-serif;
+    min-height: 0;
+    color: white;
+}
+
+window#waybar {
+    background: rgba(36, 36, 63, 0.9);
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: gray;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.visible {
+    color: white;
+}
+
+#workspaces button.focused {
+    color: white;
+    border-bottom: 3px solid white;
+}
+
+#pulseaudio, #network, #battery, #clock, #custom-power, #backlight, #tray {
+    margin: 0 5px;
+}
+
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+#battery.warning {
+   color: rgba(255, 210, 4, 1);
+}
+
+#battery.critical {
+    color: rgba(238, 46, 36, 1);
+}
+
+#battery.charging {
+    color: rgba(217, 216, 216, 1);
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: #f53c3c;
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+#taskbar {
+}
+
+#taskbar button {
+    min-width: 10px;
+}
+
+#taskbar button:hover {
+}
+
+#taskbar button.active {
+}
