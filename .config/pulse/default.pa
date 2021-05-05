@@ -1,0 +1,3 @@
+.ifexists module-bluetooth-discover.so
+load-module module-bluetooth-discover
+.endif

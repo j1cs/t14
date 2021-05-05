@@ -2,7 +2,7 @@
 
 display='wayland'; bar='_'
 [[ -z "${WAYLAND_DISPLAY}" ]] && display='xorg'; bar='─'
-sink_nr=$(pactl list short sinks | grep RUNNING | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,' | head -n 1)
+sink_nr=$(pacmd stat | awk -F": " '/^Default sink name: /{print $2}')
 icon_low="notification-audio-volume-low"
 icon_med="notification-audio-volume-medium"
 icon_high="notification-audio-volume-high"
@@ -13,7 +13,9 @@ replace_file=/tmp/volume-notification-$display
 
 
 function get_volume {
-    pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $sink_nr + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'
+    pacmd list-sinks |
+        awk '/^\s+name: /{indefault = $2 == "<'$sink_nr'>"}
+            /^\s+volume: / && indefault {print $5; exit}' | sed -e 's/%//g'
 }
 
 function get_volume_icon {
