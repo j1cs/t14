@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=Reboot
+Exec=loginctl reboot
+Icon=system-reboot
+Terminal=false
+Type=Application

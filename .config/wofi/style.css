@@ -1,0 +1,26 @@
+window {
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    border: none;
+}
+
+#input {
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 0px;
+    border: none;
+    margin: 5px;
+}
+
+#outer-box {
+    margin: 5px;
+}
+#entry:selected {
+	border: none;
+	outline: none;
+}
+#text:selected {
+	background-color: rgba(0,0,0,0);
+}
+#text {
+    margin: 5px;
+}

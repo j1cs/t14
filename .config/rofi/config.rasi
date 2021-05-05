@@ -1,0 +1,69 @@
+configuration {
+    display-drun: "Choose";
+    display-window: "Window";
+    show-icons: true;
+}
+ 
+* {
+    /*background-color: #000000E6;*/
+    background-color: rgba(0,0,0, 60%);
+    border-color: #00000000;
+    text-color: #EFEFEF;
+}
+ 
+#window {
+    border-radius: 1px;
+    padding: 10;
+    width: 40%;
+}
+ 
+#mainbox {
+    background-color: #00000000;
+}
+ 
+ 
+#listview {
+    background-color: #00000000;
+    fixed-height: 0;
+    spacing: 5px;
+    padding: 10px 10px 0px;
+}
+ 
+#element {
+    background-color: #00000000;
+    border: 0;
+    border-radius: 2px;
+    padding: 3 0  3 4 ;
+}
+ 
+#element selected {
+    background-color: #00a0e6;
+    text-color: #EFEFEF;
+}
+ 
+ 
+#inputbar {
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+    background-color: #00000000;
+}
+ 
+#case-indicator {
+    background-color: #00000000;
+    spacing:    0;
+}
+#entry {
+    background-color: #00000000;
+    spacing:    0;
+}
+#prompt {
+    background-color: #00000000;
+    spacing:    0;
+}
+ 
+#textbox-prompt-colon {
+    background-color: #00000000;
+    expand:     false;
+    str:        " 💻";
+    margin:     0px 0.3em 0em 0em ;
+}
+element-icon { size: 2ch;}

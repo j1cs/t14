@@ -1,0 +1,74 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "output": "eDP-1",
+    "height": 30,
+    "modules-left": ["wlr/taskbar"],
+    "modules-center": [],
+    "modules-right": ["backlight", "pulseaudio", "battery","clock", "custom/power",  "tray"],
+    "wlr/taskbar": {
+      "all-outputs": true,
+      "format": "{icon}",
+      "icon-size": 12,
+      "tooltip": false,
+      "on-click": "activate",
+      "on-click-middle": "close",
+      "on-click-right": "minimize"
+    },
+    "clock": {
+        "interval": 1,
+        "format": "{:%H:%M %d-%m-%Y} ",
+        "tooltip": false
+    },
+    "battery": {
+        "bat": "BAT0",
+        "adapter": "AC",
+        "states": {
+            "good": 99,
+            "warning": 30,
+            "critical": 15
+        },
+        "interval": 1,
+        "format": "{capacity}% {icon}",
+        "format-good": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2s0", // (Optional) To force the use of this interface
+        "tooltip": false,
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-disconnected": "Disconnected ⚠"
+    },
+    "pulseaudio": {
+        //"scroll-step": 1,
+        "tooltip": false,
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{percent}% {icon}",
+        "format-icons": [ "", "","", "", "", "", ""],
+        "on-scroll-up": "light -A 5",
+        "on-scroll-down": "light -U 5"
+    },
+    "custom/power": {
+        "format":"", 
+        "on-click": "~/.config/wofi/wofi-exit-wayfire.sh"
+    },
+    "tray": {
+        "spacing": 10
+    }
+}
