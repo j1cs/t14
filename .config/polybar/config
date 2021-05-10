@@ -25,7 +25,7 @@ base06 = ${xrdb:color13:#0e5a94}
 base0F = ${xrdb:color14:#b31e8d}
 base07 = ${xrdb:color15:#7a2d00}
 
-background = #50505000
+background = #202020
 foreground = ${colors.base07}
 foreground-alt = ${colors.base03}
 alert = ${colors.base08}
@@ -58,7 +58,7 @@ border-left-size = 0
 border-right-size = 0
 border-color = #00000000
 
-radius-top = 5.0
+radius-top = 0
 
 padding-left = 1
 padding-right = 2
