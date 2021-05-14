@@ -201,7 +201,7 @@ interval = 2
 type = internal/battery
 battery = BAT0
 adapter = AC0
-full-at = 94
+full-at = 100
 
 format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
