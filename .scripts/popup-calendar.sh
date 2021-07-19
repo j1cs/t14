@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BAR_HEIGHT=60 # polybar height
+BAR_HEIGHT=58 # polybar height
 BORDER_SIZE=0  # border size from your wm settings
 YAD_WIDTH=222
 YAD_HEIGHT=188

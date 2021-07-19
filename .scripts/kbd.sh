@@ -3,7 +3,7 @@
 display='wayland'; bar='_'
 [[ -z "${WAYLAND_DISPLAY}" ]] && display='xorg'; bar='─'
 icon="notification-keyboard-brightness"
-notify=`which dunstify`
+notify=`which notify-send.sh`
 replace_file=/tmp/kbd-notification-$display
 dev=sysfs/leds/tpacpi::kbd_backlight
 
@@ -33,9 +33,9 @@ function kbd_notification {
     bar=`get_bar`
     if [ ! -s $replace_file ]
     then
-        exec $notify --printid -u normal -i $icon $bar > $replace_file
+        exec $notify --print-id -u normal -i $icon $bar > $replace_file
     else
-        exec $notify -r `cat $replace_file` -u normal -i $icon $bar
+        exec $notify -R `cat $replace_file` -u normal -i $icon $bar
     fi
 }
 

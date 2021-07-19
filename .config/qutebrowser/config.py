@@ -17,7 +17,7 @@ xresources = read_xresources('*')
 
 ## This is here so configs done via the GUI are still loaded.
 ## Remove it to not load settings done via the GUI.
-# config.load_autoconfig()
+config.load_autoconfig()
 
 ## Aliases for commands. The keys of the given dictionary are the
 ## aliases, while the values are the commands they map to.
@@ -1477,7 +1477,7 @@ c.tabs.show = 'multiple'
 ## Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 ## for a blank page.
 ## Type: FuzzyUrl
-c.url.default_page = 'https://www.google.com/'
+c.url.default_page = 'https://start.duckduckgo.com/'
 
 ## URL segments where `:navigate increment/decrement` will search for a
 ## number.

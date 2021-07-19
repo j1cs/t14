@@ -82,6 +82,8 @@ for_window [class="Connman-gtk"] floating enable
 for_window [class="Lxappearance"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="Solaar"] floating enable
+for_window [class="jetbrains-.*" title="Welcome *"] floating enable border none
+for_window [class="jetbrains-.*" title="win0"] floating enable border none
 
 # start a terminal
 bindsym $mod+Return exec alacritty
@@ -241,7 +243,6 @@ exec --no-startup-id mate-screensaver
 exec --no-startup-id setxkbmap -synch
 exec --no-startup-id ~/.scripts/player.py
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b
-exec --no-startup-id dunst
 exec --no-startup-id libinput-gestures -c ~/.config/libinput-gestures-i3.conf
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id paplay ~/Music/Windows-Startup-Sounds-WAV/Microsoft_Windows_95_Startup_Sound.wav

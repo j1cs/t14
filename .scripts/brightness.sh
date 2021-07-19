@@ -2,14 +2,15 @@
 
 # Volume notification: pipewire and dunst
 display='wayland'; bar='_'
-[[ -z "${WAYLAND_DISPLAY}" ]] && display='xorg'; bar='─'
+[[ -z "${WAYLAND_DISPLAY}" ]] && display='xorg'; bar='_'
 icon_low="notification-display-brightness-low"
 icon_med="notification-display-brightness-medium"
 icon_high="notification-display-brightness-high"
 icon_full="notification-display-brightness-full"
 icon_off="notification-display-brightness-off"
-notify=`which dunstify`
+notify=`which notify-send.sh`
 replace_file=/tmp/brightness-notification-$display
+id=257
 
 function get_brightness {
     printf "%.0f\n" $(light -G / 1)
@@ -43,12 +44,7 @@ function brightness_notification {
     brightness=`get_brightness`
     icon=`get_brightness_icon $brightness`
     bar=`get_bar`
-    if [ ! -s $replace_file ]
-    then
-        exec $notify --printid -u normal -i $icon $bar > $replace_file
-    else
-        exec $notify -r `cat $replace_file` -u normal -i $icon $bar
-    fi
+    exec $notify -R $id -u normal -i $icon $bar
 }
 
 case $1 in
