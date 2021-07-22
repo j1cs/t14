@@ -1,0 +1,5 @@
+#
+# ~/.xsession
+#
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc

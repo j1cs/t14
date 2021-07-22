@@ -1,0 +1,327 @@
+;;----------------------------------
+;; Configuration made it by:
+;;    ____ _        _  _____ ____
+;;   / ___| |      / \|_   _/ ___|
+;;  | |  _| |     / _ \ | | \___ \
+;;  | |_| | |___ / ___ \| |  ___) |
+;;   \____|_____/_/   \_\_| |____/
+;;__________________________________
+
+[colors]
+base00 = ${xrdb:color0:#000000}
+base08 = ${xrdb:color1:#202020}
+base0B = ${xrdb:color2:#303030}
+base0A = ${xrdb:color3:#505050}
+base0D = ${xrdb:color4:#b0b0b0}
+base0E = ${xrdb:color5:#d0d0d0}
+base0C = ${xrdb:color6:#e0e0e0}
+base05 = ${xrdb:color7:#ffffff}
+base03 = ${xrdb:color8:#eb008a}
+base09 = ${xrdb:color9:#f29333}
+base01 = ${xrdb:color10:#f8ca12}
+base02 = ${xrdb:color11:#37b349}
+base04 = ${xrdb:color12:#00aabb}
+base06 = ${xrdb:color13:#0e5a94}
+base0F = ${xrdb:color14:#b31e8d}
+base07 = ${xrdb:color15:#7a2d00}
+
+background = #202020
+foreground = ${colors.base07}
+foreground-alt = ${colors.base03}
+alert = ${colors.base08}
+warning = ${colors.base0A}
+green = ${colors.base0B}
+blue = ${colors.base0D}
+violet = ${colors.base03}
+sky = ${colors.base0C}
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+
+[bar/main]
+width = 100%
+height = 28
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 1
+line-color = #f00
+
+border-top-size = 0
+border-left-size = 0
+border-right-size = 0
+border-color = #00000000
+
+radius-top = 0
+
+padding-left = 1
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Fira Code:size=10
+font-1 = Font Awesome 5 Free:style=Regular:size=10
+font-2 = Font Awesome 5 Free:style=Solid:size=10
+font-3 = Font Awesome 5 Brands:style=Regular:size=10
+font-4 = Noto Color Emoji:style=Regular:size=10:scale=10
+
+modules-left = i3
+modules-center = backlight pulseaudio mic previous playpause next xkeyboard temperature battery
+modules-right = calendar powermenu
+bottom = true
+
+tray-position = right
+tray-padding = 2
+
+scroll-up = #i3.next
+scroll-down = #i3.prev
+; this two options doenst work well put windows overall in i3
+;wm-restack = i3
+;override-redirect = true
+fixed-center = true
+cursor-click = pointer
+
+[module/previous]
+type = custom/script
+interval = 86400
+format = "%{T3}<label>"
+exec = echo ""
+click-left = playerctl previous &
+
+[module/next]
+type = custom/script
+interval = 86400
+format = "%{T3}<label>"
+exec = echo ""
+line-size = 1
+click-left = playerctl next &
+
+[module/playpause]
+type = custom/script
+exec = ~/.scripts/play.py 2> /dev/null
+tail = true
+click-left = playerctl play-pause &
+
+[module/xwindow]
+type = internal/xwindow
+label = %title%
+label-maxlen = 50
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+;strip-wsnumbers = true
+wrapping-scroll = false
+ 
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode = %mode%
+label-mode-padding = 1
+label-mode-foreground = #000
+label-mode-background = ${colors.foreground}
+ 
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-padding = 1
+label-focused-background = ${colors.background}
+ 
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 1
+label-unfocused-foreground = ${colors.foreground-alt}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-padding = ${self.label-focused-padding}
+label-visible-background = ${self.label-focused-background}
+ 
+; urgent = Workspace with urgency hint set
+label-urgent = %index%!
+label-urgent-padding = 1
+label-urgent-background = ${colors.foreground}
+label-urgent-foreground = ${colors.foreground-alt}
+
+label-separator = " "
+
+[module/backlight]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = amdgpu_bl0
+enable-scroll = true
+format = <ramp> <label>
+label = %percentage%%
+ramp-0 = ${env:BACKLIGHT_COLOR0}
+ramp-1 = ${env:BACKLIGHT_COLOR1}
+ramp-2 = ${env:BACKLIGHT_COLOR1}
+ramp-3 = ${env:BACKLIGHT_COLOR1}
+ramp-4 = ${env:BACKLIGHT_COLOR2}
+
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+label-connected = %essid%
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground}
+ramp-signal-foreground = ${colors.foreground}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+ 
+format-volume = <ramp-volume> <label-volume>
+format-volume-foreground = ${colors.foreground}
+label-volume = %percentage%%
+label-volume-foreground = ${colors.foreground}
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+label-muted = ${env:MUTE_COLOR}
+interval = 2
+
+[module/battery]
+#ls -1 /sys/class/power_supply/
+type = internal/battery
+battery = BAT0
+adapter = AC0
+full-at = 100
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.green}
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colors.alert}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colors.warning}
+ramp-capacity-2 = 
+ramp-capacity-2-foreground = ${colors.warning}
+ramp-capacity-3 = 
+ramp-capacity-3-foreground = ${colors.green}
+ramp-capacity-4 = 
+ramp-capacity-4-foreground = ${colors.green}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${colors.foreground}
+animation-charging-framerate = 750
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+base-temperature = 45
+warn-temperature = 75
+
+format = <ramp> <label>
+format-foreground = ${colors.blue}
+format-warn = <ramp> <label-warn>
+format-warn-foreground = ${colors.alert}
+
+label = %temperature-c%
+label-foregorund = ${colors.foreground}
+label-warn = %temperature-c%
+
+ramp-0 = ${env:TEMPERATURE_COLOR0}
+ramp-1 = ${env:TEMPERATURE_COLOR1}
+ramp-2 = ${env:TEMPERATURE_COLOR2}
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.alert}
+label-close =  
+label-close-foreground = ${colors.alert}
+label-separator = |
+label-separator-foreground = ${colors.foreground}
+
+menu-0-0 = 
+menu-0-0-foreground = ${colors.blue}
+menu-0-0-exec = menu-open-1
+menu-0-1 = 
+menu-0-1-foreground = ${colors.warning}
+menu-0-1-exec = menu-open-2
+menu-0-2 = 
+menu-0-2-foreground = ${colors.green}
+menu-0-2-exec = menu-open-3
+menu-0-3 = 
+menu-0-3-foreground = ${colors.alert}
+menu-0-3-exec = menu-open-4
+
+menu-1-0 = no
+menu-1-0-exec = menu-open-0
+menu-1-1 = yes
+menu-1-1-exec = systemctl suspend
+
+menu-2-0 = no
+menu-2-0-exec = menu-open-0
+menu-2-1 = yes
+menu-2-1-exec = systemctl hibernate
+
+menu-3-0 = no
+menu-3-0-exec = menu-open-0
+menu-3-1 = yes
+menu-3-1-exec = systemctl reboot
+
+menu-4-0 = no
+menu-4-0-exec = menu-open-0
+menu-4-1 = yes
+menu-4-1-exec = systemctl poweroff
+
+[module/xkeyboard]
+type = internal/xkeyboard
+format = <label-layout> <label-indicator>
+
+label-layout = %icon% %layout%
+layout-icon-default = 
+
+label-indicator-background = ${colors.background}
+
+label-indicator-on-capslock = " a "
+label-indicator-off-capslock =
+label-indicator-on-numlock = " 1"
+label-indicator-off-numlock =
+label-indicator-on-scrolllock = 
+label-indicator-off-scrolllock = 
+
+[module/calendar]
+type = custom/script
+exec = ~/.scripts/popup-calendar.sh
+interval = 5
+click-left = ~/.scripts/popup-calendar.sh popup &
+
+[module/mic]
+type = custom/script
+exec = ~/.scripts/mic.sh 2> /dev/null
+tail = true
+interval = 1
+click-left = ~/.scripts/mic.sh mute
+scroll-up = ~/.scripts/mic.sh up
+scroll-down = ~/.scripts/mic.sh down
+; vim:ft=dosini
