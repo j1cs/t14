@@ -1,3 +1,0 @@
-#!/bin/sh
-mkdir -p /tmp/pipewire
-exec svlogd -tt /tmp/pipewire

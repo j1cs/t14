@@ -1,4 +1,0 @@
-#!/bin/sh
-if [ ! -d /run/user/$(id -u) ]; then exit 1; fi
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
-exec pipewire

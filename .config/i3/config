@@ -37,23 +37,16 @@ set_from_resource $base0D i3wm.color4  #0e5a94
 set_from_resource $base0E i3wm.color5  #b31e8d
 set_from_resource $base0F i3wm.color14 #7a2d00
 
-#set $base00 #000000
-#set $base01 #202020
-#set $base02 #303030
-#set $base03 #505050
-#set $base04 #b0b0b0
-#set $base05 #d0d0d0
-#set $base06 #e0e0e0
-#set $base07 #ffffff
-#set $base08 #eb008a
-#set $base09 #f29333
-#set $base0A #f8ca12
-#set $base0B #37b349
-#set $base0C #00aabb
-#set $base0D #0e5a94
-#set $base0E #b31e8d
-#set $base0F #7a2d00
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
 
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
 
 # Basic color configuration using the Base16 variables for windows and borders.
 # Property Name         Border  BG      Text    Indicator Child Border
@@ -63,6 +56,7 @@ client.unfocused        $base01 $base00 $base05 $base01 $base01
 client.urgent           $base08 $base08 $base00 $base08 $base08
 client.placeholder      $base00 $base00 $base05 $base00 $base00
 client.background       $base07
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -86,7 +80,7 @@ for_window [class="jetbrains-.*" title="Welcome *"] floating enable border none
 for_window [class="jetbrains-.*" title="win0"] floating enable border none
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -95,10 +89,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec dmenu_run -nf '#d0d0d0' -nb '#000000' -sb '#0e5a94' -sf '#000000'
 bindsym $mod+p exec --no-startup-id rofi -modi drun -show drun
 # A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec rofi -modi drun,run -show drun
+# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -206,47 +200,32 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec ~/.scripts/volume.sh up
-bindsym XF86AudioLowerVolume exec ~/.scripts/volume.sh down
-bindsym XF86AudioMute exec ~/.scripts/volume.sh mute
-bindsym XF86AudioMicMute exec ~/.scripts/mic.sh mute
-
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec ~/.scripts/brightness.sh up
-bindsym XF86MonBrightnessDown exec ~/.scripts/brightness.sh down
-
-# Touchpad controls
-# bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
-# bindsym XF86WakeUp exec ~/.scripts/kbd.sh up
-
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym $mod+Shift+t exec caja
-bindsym $mod+Shift+p exec --no-startup-id mate-screensaver-command -l
-bindsym Print exec mate-screenshot
-bindsym Shift+Print exec mate-screenshot -a
-bindsym Control+Print exec mate-screenshot -w
+#bindsym XF86AudioPlay exec playerctl play-pause
+#bindsym XF86AudioPause exec playerctl pause
+#bindsym XF86AudioNext exec playerctl next
+#bindsym XF86AudioPrev exec playerctl previous
+bindsym $mod+Shift+t exec nautilus -w
+bindsym $mod+Shift+p exec dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
+bindsym XF86Display exec gnome-control-center display
+bindsym Print exec gnome-screenshot
+bindsym Shift+Print exec gnome-screenshot -a
+bindsym Control+Print exec gnome-screenshot -w
 bindsym $mod+x [urgent=latest] focus
-bindsym XF86Explorer exec caja
-bindsym XF86Display exec arandr
 bindsym $mod+Prior workspace prev
 bindsym $mod+Next workspace next
 
-# Autostart applications
-exec_always --no-startup-id ~/.screenlayout/second.sh
 exec_always --no-startup-id ~/.config/polybar/panel.sh
-exec --no-startup-id mate-screensaver
 exec --no-startup-id setxkbmap -synch
 exec --no-startup-id ~/.scripts/player.py
-exec --no-startup-id nitrogen --restore; sleep 1; picom -b
-exec --no-startup-id libinput-gestures -c ~/.config/libinput-gestures-i3.conf
-exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
-exec --no-startup-id paplay ~/Music/Windows-Startup-Sounds-WAV/Microsoft_Windows_95_Startup_Sound.wav
+exec --no-startup-id picom -b
+exec --no-startup-id libinput-gestures
+exec --no-startup-id ~/.scripts/startup-sound.sh ~/Music/Windows-Startup-Sounds-WAV/
 exec --no-startup-id xbindkeys
+exec --no-startup-id /usr/lib/gsd-xsettings
+exec_always --no-startup-id gnome-power-manager
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id gnome-flashback
 
 binding_mode_indicator no
 smart_gaps on
