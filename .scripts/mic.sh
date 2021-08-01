@@ -8,7 +8,7 @@ function color {
 
 function update_source {
     # always get the source (headphones, speakrs, etc)
-    source=$(pactl list short sources | grep -i acp | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,' | head -n 1)
+    source=$(pacmd list-sources | grep -e index | grep "\*" | awk '{print $3;}')
 }
 
 function volume_up {
@@ -36,7 +36,7 @@ function get_volume {
 function volume_print {
     update_source
 
-    mute=$(pactl list sources | grep -A 8 -i acp  | grep Mute | tail -n 1 | awk '{ print $2 }')
+    mute=$(pactl list sources | grep -A 10 -w "Source #$source"  | grep Mute | tail -n 1 | awk '{ print $2 }')
     if [ "$mute" = "yes" ]; then
         echo "%{F$(color color07)}%{F-} muted" > $content_file
     else
