@@ -78,6 +78,7 @@ for_window [class="Nm-connection-editor"] floating enable
 for_window [class="Solaar"] floating enable
 for_window [class="jetbrains-.*" title="Welcome *"] floating enable border none
 for_window [class="jetbrains-.*" title="win0"] floating enable border none
+for_window [class="zoom" title="zoom"] floating enable border none
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -208,9 +209,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+Shift+t exec nautilus -w
 bindsym $mod+Shift+p exec dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
 bindsym XF86Display exec gnome-control-center display
-bindsym Print exec gnome-screenshot
-bindsym Shift+Print exec gnome-screenshot -a
-bindsym Control+Print exec gnome-screenshot -w
+bindsym  --release Print exec gnome-screenshot
+bindsym  --release Shift+Print exec gnome-screenshot -a
+bindsym  --release Control+Print exec gnome-screenshot -w
 bindsym $mod+x [urgent=latest] focus
 bindsym $mod+Prior workspace prev
 bindsym $mod+Next workspace next

@@ -3,67 +3,92 @@ configuration {
     display-window: "Window";
     show-icons: true;
 }
- 
+
 * {
-    /*background-color: #000000E6;*/
-    background-color: rgba(0,0,0, 60%);
-    border-color: #00000000;
-    text-color: #EFEFEF;
+    foreground:                  rgba ( 255, 255, 255, 100 % );
+    normal-foreground:           @foreground;
+    alternate-normal-background: rgba ( 0, 0, 0, 0 % );
+    red:                         rgba ( 220, 50, 47, 100 % );
+    selected-urgent-foreground:  rgba ( 249, 249, 249, 100 % );
+    blue:                        rgba ( 38, 139, 210, 100 % );
+    urgent-foreground:           rgba ( 204, 102, 102, 100 % );
+    alternate-urgent-background: rgba ( 75, 81, 96, 90 % );
+    active-foreground:           rgba ( 101, 172, 255, 100 % );
+    lightbg:                     rgba ( 238, 232, 213, 100 % );
+    selected-active-foreground:  rgba ( 249, 249, 249, 100 % );
+    alternate-active-background: rgba ( 75, 81, 96, 89 % );
+    background:                  rgba ( 0, 0, 0, 60 % );
+    alternate-normal-foreground: @foreground;
+    normal-background:           @alternate-normal-background;
+    lightfg:                     rgba ( 88, 104, 117, 100 % );
+    selected-normal-background:  rgba ( 64, 132, 214, 100 % );
+    border-color:                rgba ( 0, 0, 0, 100 % );
+    spacing:                     2;
+    separatorcolor:              rgba ( 29, 31, 33, 100 % );
+    urgent-background:           rgba ( 29, 31, 33, 17 % );
+    selected-urgent-background:  rgba ( 165, 66, 66, 100 % );
+    alternate-urgent-foreground: @urgent-foreground;
+    background-color:            rgba ( 0, 0, 0, 0 % );
+    alternate-active-foreground: @active-foreground;
+    active-background:           rgba ( 29, 31, 33, 17 % );
+    selected-active-background:  rgba ( 68, 145, 237, 100 % );
 }
- 
-#window {
+window {
     border-radius: 1px;
-    padding: 10;
+    padding: 10px;
     width: 40%;
 }
- 
-#mainbox {
-    background-color: #00000000;
+
+textbox {
+    text-color: @foreground;
 }
- 
- 
-#listview {
-    background-color: #00000000;
+listview {
+    border-color: @separatorcolor;
     fixed-height: 0;
-    spacing: 5px;
+    spacing:      5px ;
+    scrollbar:    false;
     padding: 10px 10px 0px;
 }
- 
-#element {
-    background-color: #00000000;
+element {
     border: 0;
     border-radius: 2px;
-    padding: 3 0  3 4 ;
+    padding: 5px 0px 5px 7px ;
 }
- 
-#element selected {
-    background-color: #00a0e6;
-    text-color: #EFEFEF;
+
+mode-switcher {
+    border:       2px 0px 0px ;
+    border-color: @separatorcolor;
 }
- 
- 
-#inputbar {
+button {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+button.selected {
+    text-color: @selected-normal-foreground;
+}
+inputbar {
+    spacing:    0;
+    text-color: @normal-foreground;
+    padding:    1px ;
+}
+case-indicator {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+entry {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+prompt {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+inputbar {
     children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
-    background-color: #00000000;
 }
- 
-#case-indicator {
-    background-color: #00000000;
-    spacing:    0;
-}
-#entry {
-    background-color: #00000000;
-    spacing:    0;
-}
-#prompt {
-    background-color: #00000000;
-    spacing:    0;
-}
- 
-#textbox-prompt-colon {
-    background-color: #00000000;
+textbox-prompt-colon {
     expand:     false;
-    str:        " 💻";
+    str:        " 💻 ";
     margin:     0px 0.3em 0em 0em ;
+    text-color: @normal-foreground;
 }
-element-icon { size: 2ch;}
