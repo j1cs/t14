@@ -8,7 +8,7 @@ function color {
 
 function update_source {
     # always get the source (headphones, speakrs, etc)
-    source=$(pacmd list-sources | grep -e index | grep "\*" | awk '{print $3;}')
+    source=$(pactl list | grep -B 2 "Name: $(pactl get-default-source)" | head -n 1 | awk -F# '{ print $2 }')
 }
 
 function volume_up {

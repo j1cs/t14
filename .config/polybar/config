@@ -73,7 +73,7 @@ font-3 = Font Awesome 5 Brands:style=Regular:size=10
 font-4 = Noto Color Emoji:style=Regular:size=10:scale=10
 
 modules-left = i3
-modules-center = backlight pulseaudio mic previous playpause next xkeyboard temperature battery
+modules-center = backlight pulseaudio mic previous playpause next temperature battery
 modules-right = calendar powermenu
 bottom = true
 

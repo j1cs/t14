@@ -20,7 +20,7 @@ echo 'Launching polybar...'
 polybar main &
 
 # Start applets if they're not running
-for arg in "parcellite" "nm-applet" "solaar -w hide" "caffeine"
+for arg in "nm-applet" "solaar -w hide" "caffeine -k"
 do
     if ! ps ax | grep -v grep | grep -io "$arg"
     then

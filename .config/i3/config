@@ -221,12 +221,12 @@ exec --no-startup-id setxkbmap -synch
 exec --no-startup-id ~/.scripts/player.py
 exec --no-startup-id picom -b
 exec --no-startup-id libinput-gestures
-exec --no-startup-id ~/.scripts/startup-sound.sh ~/Music/Windows-Startup-Sounds-WAV/
 exec --no-startup-id xbindkeys
 exec --no-startup-id /usr/lib/gsd-xsettings
 exec_always --no-startup-id gnome-power-manager
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
+exec --no-startup-id ~/.scripts/startup-sound.sh ~/Music/Windows-Startup-Sounds-WAV/
 
 binding_mode_indicator no
 smart_gaps on
